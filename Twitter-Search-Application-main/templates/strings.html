@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tweets of a Hashtag</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e1f5fe; /* Light Twitter-like blue background for the entire page */
+            color: #333; /* Darker text for better readability on light background */
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #03A9F4; /* Twitter blue for heading */
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Slight shadow for depth */
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd; /* Subtle separation for table rows */
+        }
+        th {
+            background-color: #b3e5fc; /* Lighter blue for table headers */
+            color: #333; /* Dark text for readability */
+        }
+        tr:hover {
+            background-color: #f2f2f2; /* Light grey for hover effect */
+        }
+        p {
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tweets relevant to "{{string_search}}"</h1>
+    {% if string_tweets %}
+        <table>
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Retweets</th>
+                    <th>Likes</th>
+                    <th>Created At</th>
+                    <th>Text</th>
+                    <th>Hashtags</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tweet in string_tweets %}
+                <tr>
+                    <td>{{ tweet['User_Name'] }}</td>
+                    <td>{{ tweet['Retweet_Count'] }}</td>
+                    <td>{{ tweet['Likes_Count'] }}</td>
+                    <td>{{ tweet['created_at'] }}</td>
+                    <td>{{ tweet['Text'] }}</td>
+                    <td>{{ tweet['Hashtag'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No tweets found for the selected hashtag.</p>
+    {% endif %}
+</body>
+</html>

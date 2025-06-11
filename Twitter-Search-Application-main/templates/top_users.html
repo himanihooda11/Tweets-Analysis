@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Twitter Accounts</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e1f5fe; /* Light Twitter-like blue background */
+            color: #333; /* Darker text for readability */
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #03A9F4; /* Twitter blue for the header */
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Slight shadow for depth */
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd; /* Subtle separation for table rows */
+        }
+        th {
+            background-color: #b3e5fc; /* Lighter blue for table headers */
+            color: #333; /* Dark text for readability */
+        }
+        tr:hover {
+            background-color: #f2f2f2; /* Light grey for hover effect, enhancing readability and interaction */
+        }
+        a {
+            color: #147abf; /* Link color for better contrast and matching the theme */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline; /* Adds interaction cue on hover */
+        }
+    </style>
+  </head>
+  <body>
+    <h1>Trending Users</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Handle</th>
+          <th>Verified</th>
+          <th>Followers</th>
+          <th>Following</th>
+          <th>Location</th>
+          <th>Tweets</th>
+          <th>Bio</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for account in accounts %}
+          <tr>
+            <td>{{ account[1] }}</td>
+            <td><a href="https://twitter.com/{{ account[2] }}" target="_blank">{{ account[2] }}</a></td>
+            <td>{% if account[3] == 1 %}Yes{% else %}No{% endif %}</td>
+            <td>{{ account[4] }}</td>
+            <td>{{ account[5] }}</td>
+            <td>{{ account[6] }}</td>
+            <td>{{ account[7] }}</td>
+            <td>{{ account[8] }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

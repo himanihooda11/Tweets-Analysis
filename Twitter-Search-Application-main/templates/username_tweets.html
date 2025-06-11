@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Tweets</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e1f5fe; /* Light Twitter-like blue background for the entire page */
+            color: #333; /* Darker text for better readability on a light background */
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #03A9F4; /* Twitter blue for the header */
+            margin-left: 20px;
+            font-size: 36px;
+        }
+        .username {
+            color: #666; /* Subdued text color for less emphasis */
+            margin-left: 20px;
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 20px;
+            width: 90%;
+            max-width: 1200px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Slight shadow for depth */
+        }
+        th, td {
+            border: 1px solid #ddd; /* Light grey border for subtlety */
+            padding: 8px;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2; /* Light grey for even rows */
+        }
+        th {
+            background-color: #b3e5fc; /* Lighter blue for table headers */
+            color: #333; /* Dark text for readability */
+        }
+        tr:hover {
+            background-color: #d4e2f0; /* Slightly darker on hover for interactivity */
+        }
+    </style>
+</head>
+<body>
+    <h1>User Tweets</h1>
+    <p class="username">User: {{ username }}</p>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Text</th>
+                <th>Hashtags</th>
+                <th>Retweets</th>
+                <th>Likes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tweet in tweets %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ tweet['created_at'] }}</td>
+                    <td>{{ tweet['text'] }}</td>
+                    <td>{% if tweet['hashtags'] %}{{ tweet['hashtags'] }}{% else %}-{% endif %}</td>
+                    <td>{{ tweet['retweet_count'] }}</td>
+                    <td>{{ tweet['likes_count'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

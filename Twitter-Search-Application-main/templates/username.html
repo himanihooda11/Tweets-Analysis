@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Search Results</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e1f5fe; /* Light Twitter-like blue background for the entire page */
+            color: #333; /* Darker text for better readability on a light background */
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #03A9F4; /* Twitter blue for the header */
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Slight shadow for depth */
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd; /* Subtle separation for table rows */
+        }
+        th {
+            background-color: #b3e5fc; /* Lighter blue for table headers */
+            color: #333; /* Dark text for readability */
+        }
+        tr:hover {
+            background-color: #f2f2f2; /* Light grey for hover effect */
+        }
+        td.description {
+            max-width: 370px;
+            word-wrap: break-word;
+        }
+        a {
+            color: #147abf; /* Link color for better contrast and matching the theme */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        input[type="text"], input[type="submit"] {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+        }
+        input[type="submit"] {
+            background-color: #1DA1F2; /* Twitter-like blue for submit button */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #147abf; /* A slightly darker blue for hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>User Search Results</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Handle</th>
+                <th>Verified</th>
+                <th>Followers</th>
+                <th>Tweets</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>Creation Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in userinfo %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ result[1] }}</td>
+                    <td><a href="https://twitter.com/{{ result[2] }}" target="_blank">{{ result[2] }}</a></td>
+                    <td>{% if result[3] == 1 %}✅{% else %}❌{% endif %}</td>
+                    <td>{{ result[4] }}</td>
+                    <td>{{ result[8] }}</td>
+                    <td class="description">{{ result[9] }}</td>
+                    <td>{{ result[7] }}</td>
+                    <td>{{ result[6] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <form action="/submit2" method="post">
+        <p><label for="input-field">Enter the user number whose tweets you want to be displayed:</label><br></p>
+        <input type="text" id="input-field" name="input-field"><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
